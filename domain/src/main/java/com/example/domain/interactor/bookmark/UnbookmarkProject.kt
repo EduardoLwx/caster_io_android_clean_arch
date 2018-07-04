@@ -6,11 +6,11 @@ import com.example.domain.repository.ProjectsRepository
 import io.reactivex.Completable
 import javax.inject.Inject
 
-class UnbookmarkProjec @Inject constructor(private val projectsRepository: ProjectsRepository,
-                                           postExecutionThread: PostExecutionThread)
-    : CompletableUseCase<UnbookmarkProjec.Params>(postExecutionThread){
+class UnbookmarkProject @Inject constructor(private val projectsRepository: ProjectsRepository,
+                                            postExecutionThread: PostExecutionThread)
+    : CompletableUseCase<UnbookmarkProject.Params>(postExecutionThread){
 
-    override fun buildUseCaseCompletable(params: Params?): Completable {
+    public override fun buildUseCaseCompletable(params: Params?): Completable {
         if (params == null) throw IllegalArgumentException("Params can't be null!")
         return projectsRepository.unbookmarkProject(params.projectId)
     }

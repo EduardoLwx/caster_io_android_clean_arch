@@ -1,3 +1,4 @@
+apply plugin: 'kotlin'
 apply plugin: 'java-library'
 
 dependencies {
@@ -10,8 +11,8 @@ dependencies {
     implementation domainDependencies.rxJava
 
     testImplementation domainTestDependencies.junit
-//    testImplementation domainTestDependencies.mockito
-//    testImplementation domainTestDependencies.assertj
+    testImplementation domainTestDependencies.mockito
+    testImplementation domainTestDependencies.assertj
 }
 
 sourceCompatibility = "1.7"

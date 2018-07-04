@@ -11,7 +11,7 @@ class GetBookmarkedProjects @Inject constructor(private val projectsRepository: 
                                                 postExecutionThread: PostExecutionThread)
     : SingleUseCase <List<Project>, Nothing>(postExecutionThread)  {
 
-    override fun buildUseCaseSingle(params: Nothing?): Single<List<Project>> {
+    public override fun buildUseCaseSingle(params: Nothing?): Single<List<Project>> {
         return projectsRepository.getBookmarkedProjects()
     }
 }

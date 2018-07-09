@@ -2,6 +2,18 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile project(':domain')
+
+    implementation dataDependencies.javaxAnnotation
+    implementation dataDependencies.kotlin
+    implementation dataDependencies.javaxInject
+    implementation dataDependencies.rxKotlin
+
+    testImplementation dataTestDependencies.junit
+    testImplementation dataTestDependencies.kotlinJUnit
+    testImplementation dataTestDependencies.mockito
+    testImplementation dataTestDependencies.assertj
 }
 
 sourceCompatibility = "1.7"

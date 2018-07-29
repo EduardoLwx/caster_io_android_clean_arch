@@ -2,11 +2,11 @@ package com.example.data.store
 
 import com.example.data.repository.ProjectsDataStore
 
-class ProjectsDataStoreFactory(
+open class ProjectsDataStoreFactory(
         private val projectsCacheDataStore: ProjectsCacheDataStore,
         private val projectsRemoteDataStore: ProjectsRemoteDataStore) {
 
-    fun getDataStore(projectsCached: Boolean, cacheExpired: Boolean)
+    open fun getDataStore(projectsCached: Boolean, cacheExpired: Boolean)
             : ProjectsDataStore {
         return if (projectsCached && !cacheExpired){
             projectsCacheDataStore
@@ -15,7 +15,7 @@ class ProjectsDataStoreFactory(
         }
     }
 
-    fun getCacheDataStore() : ProjectsDataStore {
+    open fun getCacheDataStore() : ProjectsDataStore {
         return projectsCacheDataStore
     }
 }

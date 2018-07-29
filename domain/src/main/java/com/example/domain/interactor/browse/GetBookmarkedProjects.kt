@@ -4,6 +4,7 @@ import com.example.domain.executor.PostExecutionThread
 import com.example.domain.interactor.SingleUseCase
 import com.example.domain.model.Project
 import com.example.domain.repository.ProjectsRepository
+import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -11,7 +12,7 @@ class GetBookmarkedProjects @Inject constructor(private val projectsRepository: 
                                                 postExecutionThread: PostExecutionThread)
     : SingleUseCase <List<Project>, Nothing>(postExecutionThread)  {
 
-    public override fun buildUseCaseSingle(params: Nothing?): Single<List<Project>> {
+    public override fun buildUseCaseSingle(params: Nothing?): Observable<List<Project>> {
         return projectsRepository.getBookmarkedProjects()
     }
 }

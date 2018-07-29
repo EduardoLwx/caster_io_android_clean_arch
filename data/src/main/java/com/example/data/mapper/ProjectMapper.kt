@@ -3,7 +3,7 @@ package com.example.data.mapper
 import com.example.data.model.ProjectEntity
 import com.example.domain.model.Project
 
-class ProjectMapper : EntityMapper<ProjectEntity, Project> {
+open class ProjectMapper : EntityMapper<ProjectEntity, Project> {
 
     override fun mapFromEntity(entity: ProjectEntity): Project {
         return Project(entity.id, entity.name, entity.fullName, entity.starCount,

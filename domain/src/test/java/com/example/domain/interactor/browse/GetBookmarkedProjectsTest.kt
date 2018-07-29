@@ -5,6 +5,7 @@ import com.example.domain.model.Project
 import com.example.domain.repository.ProjectsRepository
 import com.example.domain.test.ProjectDataFactory
 import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.Observable
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -40,6 +41,6 @@ class GetBookmarkedProjectsTest {
 
     private fun stubGetbookmarkedProjects(list: List<Project>){
         whenever(projectsRepository.getBookmarkedProjects())
-                .thenReturn(Single.just(list))
+                .thenReturn(Observable.just(list))
     }
 }

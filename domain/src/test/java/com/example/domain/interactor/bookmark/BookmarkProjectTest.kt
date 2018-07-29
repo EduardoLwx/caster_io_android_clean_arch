@@ -1,7 +1,6 @@
 package com.example.domain.interactor.bookmark
 
 import com.example.domain.executor.PostExecutionThread
-import com.example.domain.interactor.bookmark.BookmarkProject
 import com.example.domain.repository.ProjectsRepository
 import com.example.domain.test.ProjectDataFactory
 import com.nhaarman.mockito_kotlin.any

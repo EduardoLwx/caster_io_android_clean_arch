@@ -5,6 +5,7 @@ import com.example.domain.model.Project
 import com.example.domain.repository.ProjectsRepository
 import com.example.domain.test.ProjectDataFactory
 import com.nhaarman.mockito_kotlin.whenever
+import io.reactivex.Observable
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -26,7 +27,7 @@ class GetProjectsTest {
 
     @Test
     fun getProjectsCompletes(){
-        stubGetProjects(Single.just(ProjectDataFactory.makeProjectList(2)))
+        stubGetProjects(Observable.just(ProjectDataFactory.makeProjectList(2)))
         val testSingle = getProjects.buildUseCaseSingle().test()
         testSingle.assertComplete()
     }
@@ -34,12 +35,12 @@ class GetProjectsTest {
     @Test
     fun getProjectsResultData(){
         val projects = ProjectDataFactory.makeProjectList(2)
-        stubGetProjects(Single.just(projects))
+        stubGetProjects(Observable.just(projects))
         val testSingle = getProjects.buildUseCaseSingle().test()
         testSingle.assertValue(projects)
     }
 
-    private fun stubGetProjects(single: Single<List<Project>>){
+    private fun stubGetProjects(single: Observable<List<Project>>){
         whenever(projectsRepository.getProjects()).thenReturn(single)
     }
 

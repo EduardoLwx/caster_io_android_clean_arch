@@ -1,9 +1,11 @@
 package com.example.domain.interactor
 
 import com.example.domain.executor.PostExecutionThread
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
@@ -12,9 +14,9 @@ abstract class SingleUseCase<T, in Params> constructor(
 
     private val disposables = CompositeDisposable()
 
-    protected abstract fun buildUseCaseSingle(params: Params? = null): Single<T>
+    protected abstract fun buildUseCaseSingle(params: Params? = null): Observable<T>
 
-    open fun execute(singleObserver: DisposableSingleObserver<T>, params: Params? = null) {
+    open fun execute(singleObserver: DisposableObserver<T>, params: Params? = null) {
         val single = this.buildUseCaseSingle(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(postExecutionThread.scheduler)

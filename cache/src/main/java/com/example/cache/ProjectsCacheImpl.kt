@@ -1,13 +1,16 @@
 package com.example.cache
 
+import android.util.Log
 import com.example.cache.db.ProjectsDatabase
 import com.example.cache.mapper.CachedProjectMapper
 import com.example.cache.model.Config
 import com.example.data.model.ProjectEntity
 import com.example.data.repository.ProjectsCache
 import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.rxkotlin.toSingle
 import javax.inject.Inject
 
 class ProjectsCacheImpl @Inject constructor(
@@ -77,10 +80,9 @@ class ProjectsCacheImpl @Inject constructor(
     override fun isProjectsCacheExpired(): Single<Boolean> {
         val currentTime = System.currentTimeMillis()
         val expirationTime = (60 * 10 * 1000).toLong()
-        return projectsDatabase.configDao().getConfig()
-                .single(Config(lastCacheTime = 0))
+        return projectsDatabase.configDao().getConfig().toSingle(Config(lastCacheTime = 0))
                 .map {
-                    currentTime - it.lastCacheTime > expirationTime
+                    currentTime - it.lastCacheTime < expirationTime
                 }
     }
 
